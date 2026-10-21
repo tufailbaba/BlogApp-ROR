@@ -1,0 +1,57 @@
+<%= form_with(model: blog_post, class: "form-card") do |form| %>
+  <% if blog_post.errors.any? %>
+    <div id="error_explanation" class="form-errors" role="alert">
+      <h2><%= pluralize(blog_post.errors.count, "error") %> prevented this post from being saved:</h2>
+      <ul>
+        <% blog_post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-fields">
+    <div class="field field--full">
+      <%= form.label :title %>
+      <%= form.text_field :title, autofocus: true, placeholder: "Give your story a title", required: true %>
+    </div>
+
+    <div class="field field--full">
+      <%= form.label :body %>
+      <%= form.rich_textarea :body, placeholder: "Start writing your story..." %>
+    </div>
+
+    <div class="field field--full">
+      <%= form.label :tags %>
+      <%= form.textarea :tags, rows: 2, placeholder: "e.g. ideas, travel, notes" %>
+      <span class="field-hint">Separate tags with commas.</span>
+    </div>
+
+    <div class="field">
+      <%= form.label :meta_title %>
+      <%= form.text_field :meta_title, placeholder: "Optional search result title" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :meta_description %>
+      <%= form.textarea :meta_description, rows: 3, placeholder: "A short summary for search engines" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :meta_image %>
+      <%= form.file_field :meta_image, accept: "image/*" %>
+      <span class="field-hint">Used for social sharing previews.</span>
+    </div>
+
+    <div class="field">
+      <%= form.label :banner_image %>
+      <%= form.file_field :banner_image, accept: "image/*" %>
+      <span class="field-hint">Shown at the top of the post and on the journal.</span>
+    </div>
+
+    <div class="form-actions">
+      <%= form.submit blog_post.persisted? ? "Save changes" : "Publish post", class: "button" %>
+      <%= link_to "Cancel", blog_post.persisted? ? blog_post : blog_posts_path, class: "button button--secondary" %>
+    </div>
+  </div>
+<% end %>

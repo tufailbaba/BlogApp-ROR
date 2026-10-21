@@ -1,0 +1,26 @@
+<% content_for :title, "Blog posts" %>
+
+<section aria-labelledby="posts-heading">
+  <div class="page-heading">
+    <div>
+      <p class="eyebrow">Stories, ideas & inspiration</p>
+      <h1 id="posts-heading">The journal</h1>
+      <p class="page-subtitle">A collection of thoughts worth sharing.</p>
+    </div>
+    <%= link_to "＋  New blog post", new_blog_post_path, class: "button" %>
+  </div>
+
+  <% if @blog_posts.any? %>
+    <div class="post-grid" id="blog_posts">
+      <% @blog_posts.each do |blog_post| %>
+        <%= render blog_post %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <h2>Your journal starts here</h2>
+      <p>Write your first post and it will show up here.</p>
+      <%= link_to "Create your first post", new_blog_post_path, class: "button" %>
+    </div>
+  <% end %>
+</section>

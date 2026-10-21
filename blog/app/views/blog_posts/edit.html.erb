@@ -1,0 +1,14 @@
+<% content_for :title, "Editing blog post" %>
+
+<section>
+  <div class="page-heading">
+    <div>
+      <p class="eyebrow">Make it even better</p>
+      <h1>Edit your post</h1>
+      <p class="page-subtitle">Update the story and save your changes.</p>
+    </div>
+    <%= link_to "View post", @blog_post, class: "button button--secondary" %>
+  </div>
+
+  <%= render "form", blog_post: @blog_post %>
+</section>

@@ -1,0 +1,58 @@
+<% content_for :title, "Showing blog post" %>
+
+<article>
+  <div class="page-heading">
+    <div>
+      <p class="eyebrow">From the journal</p>
+      <h1>Story details</h1>
+    </div>
+    <%= link_to "← All posts", blog_posts_path, class: "button button--secondary" %>
+  </div>
+
+  <div class="post-detail">
+    <% if @blog_post.banner_image.attached? %>
+      <%= image_tag @blog_post.banner_image, class: "post-detail__image", alt: @blog_post.title %>
+    <% end %>
+
+    <div class="post-detail__body">
+      <h2 class="post-detail__title"><%= @blog_post.title.presence || "Untitled post" %></h2>
+
+      <div class="post-detail__content">
+        <%= @blog_post.body %>
+      </div>
+
+      <div class="post-detail__meta">
+        <% if @blog_post.tags.present? %>
+          <div class="post-detail__meta-item">
+            <strong>Tags</strong>
+            <%= @blog_post.tags %>
+          </div>
+        <% end %>
+        <% if @blog_post.meta_title.present? %>
+          <div class="post-detail__meta-item">
+            <strong>Meta title</strong>
+            <%= @blog_post.meta_title %>
+          </div>
+        <% end %>
+        <% if @blog_post.meta_description.present? %>
+          <div class="post-detail__meta-item">
+            <strong>Meta description</strong>
+            <%= @blog_post.meta_description %>
+          </div>
+        <% end %>
+        <% if @blog_post.meta_image.attached? %>
+          <div class="post-detail__meta-item">
+            <strong>Meta image</strong>
+            <%= link_to @blog_post.meta_image.filename, @blog_post.meta_image %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-actions">
+    <%= link_to "Edit post", edit_blog_post_path(@blog_post), class: "button" %>
+    <%= link_to "Back to journal", blog_posts_path, class: "button button--secondary" %>
+    <%= button_to "Delete post", @blog_post, method: :delete, class: "button button--danger", form_class: "button_to--danger", data: { turbo_confirm: "Delete this post? This cannot be undone." } %>
+  </div>
+</article>

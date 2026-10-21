@@ -23,6 +23,23 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <%= link_to root_path, class: "brand" do %>
+          All Blogs<span>.</span>
+        <% end %>
+        <nav class="site-nav" aria-label="Main navigation">
+          <%= link_to "All posts", blog_posts_path, class: "site-nav__link" %>
+          <%= link_to "Write a post", new_blog_post_path, class: "button" %>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <% if notice.present? %>
+        <p class="flash" id="notice" role="status"><%= notice %></p>
+      <% end %>
+      <%= yield %>
+    </main>
   </body>
 </html>
